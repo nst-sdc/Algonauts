@@ -1,0 +1,108 @@
+.team-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 20px;
+    padding-top: 20px;
+  }
+  
+  /* Member Card */
+  .member-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: left;
+    width: 500px;
+    height: 200px;
+    display: flex;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .member-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Image Section */
+  .member-card .image-container {
+    width: 40%;
+    height: 100%;
+    background-color: #e0e0e0; /* Placeholder background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  .member-card .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  /* Fallback for Broken Image */
+  .member-card .image-container img:not([src]) {
+    background: #e0e0e0;
+    content: "Image not available";
+    font-size: 0.8em;
+    color: #7f8c8d;
+    text-align: center;
+  }
+  
+  /* Details Section */
+  .member-card .details {
+    width: 60%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .member-card h2 {
+    margin: 5px 0;
+    font-size: 1.4em;
+    color: #2c3e50;
+  }
+  
+  .member-card p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: #7f8c8d;
+  }
+  
+  /* Social Links */
+  .social-links {
+    margin-top: 10px;
+  }
+  
+  .social-links a {
+    text-decoration: none;
+    color: #2980b9;
+    margin-right: 10px;
+    font-size: 0.9em;
+    font-weight: 500;
+    display: inline-block;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .social-links a:hover {
+    color: #1abc9c;
+  }
+  
+  .dropdown {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  
+  .dropdown select {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+  }

@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+
+<div class="content">
+  <div class="leaderboard">
+    <h2 class="leaderboard-title">Leaderboard</h2>
+
+    <div class="dropdown">
+      <select id="dropdown">
+        <option value="algonauts">Algonauts</option>
+        <option value="codeforces">Codeforces</option>
+        <option value="codechef">CodeChef</option>
+        <option value="leetcode">LeetCode</option>
+        <option value="cses">CSES</option>
+      </select>
+    </div>
+
+    <table class="leaderboard-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Activity</th>
+          <th>Streak</th>
+          <th>Question Solved</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+<script src="./utils.js"></script>
+<script src="scripts/leaderboard.js"></script>
+
+<%- include('partials/footer') %>

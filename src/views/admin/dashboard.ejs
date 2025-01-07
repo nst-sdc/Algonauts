@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Management Dashboard</title>
+    <link rel="stylesheet" href="style/dashboard.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="/dashboard" class="nav-link">Member Management</a>
+            <a href="/problems" class="nav-link">Problems of the Day</a>
+        </div>
+        <div class="navbar-right">
+            <a href="/logout" class="nav-link">Log out</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="left-panel">
+            <h2>Add New Member</h2>
+            <% if (message !== undefined) { %>
+                <div class="message"><%= message %></div>
+            <% } %>
+            <form id="memberForm" action="/dashboard" method="POST">
+                <label>Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label>Role:</label>
+                <div class="dropdown">
+                    <select id="role" name="role">
+                        <option value="participant">Participant</option>
+                        <option value="member">Member</option>
+                        <option value="coordinator">Coordinator</option>
+                        <option value="joint executive">Joint Executive</option>
+                        <option value="executive">Executive</option>
+                    </select>
+                </div>
+                <label>LeetCode Username:</label>
+                <input type="text" id="leetcode" name="leetcode_username" required>
+
+                <label>Codeforces Username:</label>
+                <input type="text" id="codeforces" name="codeforces_username" required>
+
+                <label>CodeChef Username:</label>
+                <input type="text" id="codechef" name="codechef_username" required>
+
+                <label>CSES ID:</label>
+                <input type="text" id="atcoder" name="cses_username" required>
+
+                <button type="submit">Add Member</button>
+            </form>
+        </div>
+
+        <!-- Right Panel for Searching and Viewing Members -->
+        <div class="right-panel">
+            <h2>Search Members</h2>
+            <input type="text" id="search" placeholder="Search by name...">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Actions</th>
+                        <th>Flagged</th>
+                    </tr>
+                </thead>
+                <tbody id="memberList">
+                    <% for (let i = 0; i < data.length; i++) { %>
+                        <tr class="member-row" id="<%= data[i]._id %>">
+                            <td class="member-name"><%= data[i].name %></td>
+                            <td>
+                                <button class="flag-btn" onclick="flagUser('<%= data[i]._id %>')">Flag</button>
+                                <button class="edit-btn">Edit</button>
+                                <button class="remove-btn" onclick="removeUser('<%= data[i]._id %>')">Remove</button>
+                            </td>
+                            <td><%= data[i].flag %></td>
+                        </tr>
+                        <tr class="member-details hidden">
+                            <td colspan="3">
+                                <p><strong>Role:</strong> <%= data[i].role %></p>
+                                <% for (const key in data[i].ProgressMatrixes) { %>
+                                    <p><strong><%= key %>:</strong> <%= data[i].ProgressMatrixes[key].username %></p>
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="utils.js"></script> 
+    <script src="scripts/dashboard.js"></script> 
+</body>
+</html>

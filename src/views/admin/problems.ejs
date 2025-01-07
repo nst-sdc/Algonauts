@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problems of the Day</title>
+    <link rel="stylesheet" href="style/problems.css">
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="/dashboard" class="nav-link">Member Management</a>
+        <a href="/problems" class="nav-link">Problems of the Day</a>
+    </div>
+    <div class="navbar-right">
+        <a href="/logout" class="nav-link">Log out</a>
+    </div>
+</nav>
+<div class="container">
+    <!-- Left Side: Add New Question Section -->
+    <div class="left-panel">
+        <h2>Add New Question</h2>
+        <form id="questionForm" method="POST" action="/problems">
+            <label>Question Name:</label>
+            <input type="text" name="name" id="questionName" required>
+            
+            <label>Problem Index: </label>
+            <input type="text" name="problemIndex" id="problemIndex" required>
+
+            <label>Contest ID: </label>
+            <input type="number" name="contestId" id="contestId" required>
+
+            <label>Tags:</label>
+            <input type="text" name="tags" id="tagsContainer" placeholder="Greedy,DP,Recursion"required>
+            
+            <label>Date:</label>
+            <input type="text" name="date" id="dateContainer" placeholder="2024-12-31">
+            
+            <label>Difficulty:</label>
+            <select id="questionDifficulty" name="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+            
+            <button type="submit">Add Question</button>
+        </form>
+    </div>
+
+    <!-- Right Side: Search and Questions List -->
+    <div class="right-panel">
+        <h2>Search Questions</h2>
+        <input type="text" id="searchQuestion" placeholder="Search by question name...">
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Question Name</th>
+                    <th>Difficulty</th>
+                    <th>Tags</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="questionList">
+                    <% for(let i = 0 ; data && i < data.length ; i++) { %>
+                    <tr>
+                        <td><a href="<%= data[i].link %>" target="_blank"><%= data[i].name %></a></td>
+                        
+                        <td><%= data[i].difficulty %></td>
+                        <td>
+                            <% for(let j = 0 ; j < data[i].tags.length ; j++){ %> 
+                                #<%= data[i].tags[j] %> 
+                            <%}%> 
+                        </td>
+                        <td><%= data[i].date %></td>
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="remove-btn">Remove</button>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="scripts/problems.js"></script>
+</body>
+</html>
