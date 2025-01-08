@@ -1,0 +1,11 @@
+[build]
+builder = "nixpacks"
+buildCommand = "cd BACKEND && npm install"
+
+[deploy]
+startCommand = "cd BACKEND && npm start"
+healthcheckPath = "/"
+healthcheckTimeout = 100
+
+[service]
+internal_port = 3000
