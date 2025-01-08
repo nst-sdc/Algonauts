@@ -1,11 +1,25 @@
 [build]
 builder = "nixpacks"
-buildCommand = "cd BACKEND && npm install"
 
 [deploy]
+numReplicas = 1
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
 startCommand = "cd BACKEND && npm start"
 healthcheckPath = "/"
 healthcheckTimeout = 100
 
 [service]
 internal_port = 3000
+
+[phases.setup]
+nixPkgs = ["nodejs", "npm"]
+
+[phases.build]
+cmds = ["cd BACKEND", "npm install"]
+
+[phases.release]
+cmds = ["cd BACKEND", "npm run build"]
+
+[start]
+cmd = "cd BACKEND && npm start"
