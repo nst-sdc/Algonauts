@@ -25,3 +25,4 @@ yarn-error.log*
 
 # Vercel
 .vercel
+.DS_Store
