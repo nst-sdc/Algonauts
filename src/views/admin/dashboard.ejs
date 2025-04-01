@@ -4,92 +4,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Member Management Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style/dashboard.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="navbar-left">
-            <a href="/dashboard" class="nav-link">Member Management</a>
-            <a href="/problems" class="nav-link">Problems of the Day</a>
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                <span>CodeTracker</span>
+            </div>
+            <a href="/dashboard" class="nav-link active"><i class="fas fa-users"></i> Member Management</a>
+            <a href="/problems" class="nav-link"><i class="fas fa-tasks"></i> Problems of the Day</a>
         </div>
         <div class="navbar-right">
-            <a href="/logout" class="nav-link">Log out</a>
+            <a href="/logout" class="nav-link"><i class="fas fa-sign-out-alt"></i> Log out</a>
         </div>
     </nav>
+    
     <div class="container">
         <div class="left-panel">
-            <h2>Add New Member</h2>
+            <div class="panel-header">
+                <h2><i class="fas fa-user-plus"></i> Add New Member</h2>
+            </div>
+            
             <% if (message !== undefined) { %>
-                <div class="message"><%= message %></div>
-            <% } %>
-            <form id="memberForm" action="/dashboard" method="POST">
-                <label>Name:</label>
-                <input type="text" id="name" name="name" required>
-
-                <label>Role:</label>
-                <div class="dropdown">
-                    <select id="role" name="role">
-                        <option value="participant">Participant</option>
-                        <option value="member">Member</option>
-                        <option value="coordinator">Coordinator</option>
-                        <option value="joint executive">Joint Executive</option>
-                        <option value="executive">Executive</option>
-                    </select>
+                <div class="message <%= message.includes('success') ? 'success' : 'error' %>">
+                    <i class="<%= message.includes('success') ? 'fas fa-check-circle' : 'fas fa-exclamation-circle' %>"></i>
+                    <%= message %>
                 </div>
-                <label>LeetCode Username:</label>
-                <input type="text" id="leetcode" name="leetcode_username" required>
+            <% } %>
+            
+            <form id="memberForm" action="/dashboard" method="POST">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter full name" required>
+                </div>
 
-                <label>Codeforces Username:</label>
-                <input type="text" id="codeforces" name="codeforces_username" required>
+                <div class="form-group">
+                    <label for="role"><i class="fas fa-user-tag"></i> Role:</label>
+                    <div class="custom-select">
+                        <select id="role" name="role">
+                            <option value="participant">Participant</option>
+                            <option value="member">Member</option>
+                            <option value="coordinator">Coordinator</option>
+                            <option value="joint executive">Joint Executive</option>
+                            <option value="executive">Executive</option>
+                        </select>
+                    </div>
+                </div>
 
-                <label>CodeChef Username:</label>
-                <input type="text" id="codechef" name="codechef_username" required>
+                <div class="form-group">
+                    <label for="leetcode"><i class="fab fa-leanpub"></i> LeetCode Username:</label>
+                    <input type="text" id="leetcode" name="leetcode_username" placeholder="Enter LeetCode username" required>
+                </div>
 
-                <label>CSES ID:</label>
-                <input type="text" id="atcoder" name="cses_username" required>
+                <div class="form-group">
+                    <label for="codeforces"><i class="fas fa-code"></i> Codeforces Username:</label>
+                    <input type="text" id="codeforces" name="codeforces_username" placeholder="Enter Codeforces username" required>
+                </div>
 
-                <button type="submit">Add Member</button>
+                <div class="form-group">
+                    <label for="codechef"><i class="fas fa-utensils"></i> CodeChef Username:</label>
+                    <input type="text" id="codechef" name="codechef_username" placeholder="Enter CodeChef username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cses"><i class="fas fa-graduation-cap"></i> CSES ID:</label>
+                    <input type="text" id="cses" name="cses_username" placeholder="Enter CSES ID" required>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-plus-circle"></i> Add Member
+                </button>
             </form>
         </div>
 
-        <!-- Right Panel for Searching and Viewing Members -->
         <div class="right-panel">
-            <h2>Search Members</h2>
-            <input type="text" id="search" placeholder="Search by name...">
+            <div class="panel-header">
+                <h2><i class="fas fa-search"></i> Member Directory</h2>
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search" placeholder="Search by name...">
+                </div>
+            </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Actions</th>
-                        <th>Flagged</th>
-                    </tr>
-                </thead>
-                <tbody id="memberList">
-                    <% for (let i = 0; i < data.length; i++) { %>
-                        <tr class="member-row" id="<%= data[i]._id %>">
-                            <td class="member-name"><%= data[i].name %></td>
-                            <td>
-                                <button class="flag-btn" onclick="flagUser('<%= data[i]._id %>')">Flag</button>
-                                <button class="edit-btn">Edit</button>
-                                <button class="remove-btn" onclick="removeUser('<%= data[i]._id %>')">Remove</button>
-                            </td>
-                            <td><%= data[i].flag %></td>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Actions</th>
+                            <th>Flags</th>
                         </tr>
-                        <tr class="member-details hidden">
-                            <td colspan="3">
-                                <p><strong>Role:</strong> <%= data[i].role %></p>
-                                <% for (const key in data[i].ProgressMatrixes) { %>
-                                    <p><strong><%= key %>:</strong> <%= data[i].ProgressMatrixes[key].username %></p>
-                                <% } %>
-                            </td>
-                        </tr>
-                    <% } %>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody id="memberList">
+                        <% for (let i = 0; i < data.length; i++) { %>
+                            <tr class="member-row" id="<%= data[i]._id %>">
+                                <td class="member-name">
+                                    <i class="fas fa-chevron-right expand-icon"></i>
+                                    <%= data[i].name %>
+                                </td>
+                                <td class="actions">
+                                    <button class="btn flag-btn" onclick="flagUser('<%= data[i]._id %>')" title="Flag Member">
+                                        <i class="fas fa-flag"></i>
+                                    </button>
+                                    <button class="btn edit-btn" title="Edit Member">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn remove-btn" onclick="removeUser('<%= data[i]._id %>')" title="Remove Member">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                                <td class="flag-count"><%= data[i].flag %></td>
+                            </tr>
+                            <tr class="member-details hidden">
+                                <td colspan="3">
+                                    <div class="details-container">
+                                        <div class="detail-item">
+                                            <span class="detail-label"><i class="fas fa-user-tag"></i> Role:</span>
+                                            <span class="detail-value"><%= data[i].role %></span>
+                                        </div>
+                                        
+                                        <% for (const key in data[i].ProgressMatrixes) { %>
+                                            <div class="detail-item">
+                                                <span class="detail-label">
+                                                    <% if (key === "LeetCode") { %>
+                                                        <i class="fab fa-leanpub"></i>
+                                                    <% } else if (key === "CodeForces") { %>
+                                                        <i class="fas fa-code"></i>
+                                                    <% } else if (key === "CodeChef") { %>
+                                                        <i class="fas fa-utensils"></i>
+                                                    <% } else if (key === "CSES") { %>
+                                                        <i class="fas fa-graduation-cap"></i>
+                                                    <% } else { %>
+                                                        <i class="fas fa-keyboard"></i>
+                                                    <% } %>
+                                                    <%= key %>:
+                                                </span>
+                                                <span class="detail-value"><%= data[i].ProgressMatrixes[key].username %></span>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="empty-state" class="empty-state hidden">
+                <i class="fas fa-search"></i>
+                <p>No members found matching your search.</p>
+            </div>
         </div>
     </div>
-    <script src="utils.js"></script> 
-    <script src="scripts/dashboard.js"></script> 
+
+    <script src="utils.js"></script>
+    <script src="scripts/dashboard.js"></script>
 </body>
 </html>
