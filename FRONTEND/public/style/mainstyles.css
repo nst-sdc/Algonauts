@@ -902,8 +902,6 @@ h2, h3 {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-left: 3px solid var(--neon-blue);
-  offset-distance: 10px;
-  
 }
 
 .card:hover {
@@ -940,7 +938,6 @@ button, .btn {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 14px;
-  margin-top: 10px;
 }
 
 button:hover, .btn:hover {

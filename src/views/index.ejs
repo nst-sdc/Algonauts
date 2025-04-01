@@ -1,15 +1,51 @@
 <%- include('partials/header') %>
 <div class="content">
+  <div class="section-header">
+    <i class="fas fa-fire"></i>
+    <h2>Competitive Programming Hub</h2>
+  </div>
+  
   <div class="leaderboard">
-    <h2>Problems of the day</h2>
-    <br />
+    <div class="section-header">
+      <i class="fas fa-tasks"></i>
+      <h2>Problems of the Day</h2>
+    </div>
     <table class="problemset" id="potd">
       Loading....
     </table>
-    <br />
-    <br />
-    <h2>Archive: Problems, Tags, and Ratings</h2>
-    <br />
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-header">
+        <h3><i class="fas fa-award"></i> Top Performers</h3>
+      </div>
+      <div class="card-body">
+        <p>Check out this week's top performers in competitive programming challenges.</p>
+        <br/>
+        <br/>
+        
+        <a href="/leaderboard" class="btn"">View Leaderboard</a>
+      </div>
+    </div>
+    
+    <div class="card contest-card">
+      <div class="card-header">
+        <h3><i class="fas fa-code"></i> Upcoming Contests</h3>
+      </div>
+      <div class="card-body">
+        <p>Our next competition begins in:</p>
+        <div class="contest-timer" id="contest-countdown">--:--:--</div>
+        <a href="/calendar" class="btn">View Calendar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="leaderboard">
+    <div class="section-header">
+      <i class="fas fa-archive"></i>
+      <h2>Archive: Problems, Tags, and Ratings</h2>
+    </div>
     <table class="problemset" id="archive">
       Loading....
     </table>
@@ -17,5 +53,6 @@
 </div>
 <script src="./utils.js"></script>
 <script src="scripts/index.js"></script>
+<script src="scripts/contest-timer.js"></script>
 
 <%- include('partials/footer') %>
