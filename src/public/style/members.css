@@ -1,108 +1,120 @@
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #1e40af;
+  --text-color: #1f2937;
+  --light-bg: #f9fafb;
+  --border-color: #e5e7eb;
+  --hover-bg: #f3f4f6;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: var(--text-color);
+  background-color: var(--light-bg);
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.75rem;
+}
+
 .team-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-    gap: 20px;
-    padding-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+.member-card {
+  background: #ffffff;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  display: flex;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  height: 140px;
+}
+
+.member-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.member-card .image-container {
+  width: 38%;
+  background-color: #f3f4f6;
+  overflow: hidden;
+}
+
+.member-card .image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.member-card .details {
+  width: 62%;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.member-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.member-role {
+  font-size: 1rem;
+  color: var(--text-color);
+  font-weight: 500;
+  margin: 0 0 0.5rem 0;
+}
+
+.cp-stats {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.platform-links {
+  display: flex;
+  margin-top: 0.75rem;
+  gap: 1rem;
+}
+
+.platform-links a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.platform-links a:hover {
+  color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+  .team-container {
+      grid-template-columns: 1fr;
   }
-  
-  /* Member Card */
-  .member-card {
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
-    text-align: left;
-    width: 500px;
-    height: 200px;
-    display: flex;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
+
+  .content {
+      padding: 1rem;
   }
-  
-  .member-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Image Section */
-  .member-card .image-container {
-    width: 40%;
-    height: 100%;
-    background-color: #e0e0e0; /* Placeholder background */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  
-  .member-card .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  
-  /* Fallback for Broken Image */
-  .member-card .image-container img:not([src]) {
-    background: #e0e0e0;
-    content: "Image not available";
-    font-size: 0.8em;
-    color: #7f8c8d;
-    text-align: center;
-  }
-  
-  /* Details Section */
-  .member-card .details {
-    width: 60%;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .member-card h2 {
-    margin: 5px 0;
-    font-size: 1.4em;
-    color: #2c3e50;
-  }
-  
-  .member-card p {
-    margin: 5px 0;
-    font-size: 0.9em;
-    color: #7f8c8d;
-  }
-  
-  /* Social Links */
-  .social-links {
-    margin-top: 10px;
-  }
-  
-  .social-links a {
-    text-decoration: none;
-    color: #2980b9;
-    margin-right: 10px;
-    font-size: 0.9em;
-    font-weight: 500;
-    display: inline-block;
-    transition: color 0.2s ease-in-out;
-  }
-  
-  .social-links a:hover {
-    color: #1abc9c;
-  }
-  
-  .dropdown {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
-  
-  .dropdown select {
-    padding: 5px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    cursor: pointer;
-  }
+}
